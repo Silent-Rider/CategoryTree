@@ -7,16 +7,13 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 
 import com.example.category_tree.bot.TelegramBot;
 import com.example.category_tree.service.ExcelService;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class DownloadCommand implements Command {
 
     private final ExcelService excelService;
     private final TelegramBot bot;
-
-    public DownloadCommand(ExcelService excelService, TelegramBot bot) {
-        this.excelService = excelService;
-        this.bot = bot;
-    }
 
     @Override
     public void execute(long chatId, String[] args) {

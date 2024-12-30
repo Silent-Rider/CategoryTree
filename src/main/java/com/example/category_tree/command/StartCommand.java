@@ -6,23 +6,23 @@ import com.example.category_tree.service.CommandRegistry;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class HelpCommand implements Command {
+public class StartCommand implements Command {
 
     private final CommandRegistry commandRegistry;
     private final TelegramBot bot;
 
     @Override
     public void execute(long chatId, String[] args) {
-        StringBuilder helpMessage = new StringBuilder("Список команд:\n");
+        StringBuilder startMessage = new StringBuilder("\"Добро пожаловать в бот дерева категорий! " + 
+        "Вот доступные команды:\n");
         commandRegistry.getAllCommands().forEach((name, command) ->
-            helpMessage.append("/").append(name).append(" - ").append(command.getDescription()).append("\n")
+            startMessage.append("/").append(name).append(" - ").append(command.getDescription()).append("\n")
         );
-        bot.sendMessage(chatId, helpMessage.toString());
+        bot.sendMessage(chatId, startMessage.toString());
     }
 
     @Override
     public String getDescription() {
-        return "Выводит список доступных команд";
+        return "Перезапускает бота";
     }
 }
-

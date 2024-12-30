@@ -7,22 +7,11 @@ import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Document;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import com.example.category_tree.command.AddElementCommand;
-import com.example.category_tree.command.Command;
-import com.example.category_tree.command.DownloadCommand;
-import com.example.category_tree.command.HelpCommand;
-import com.example.category_tree.command.RemoveElementCommand;
-import com.example.category_tree.command.UploadCommand;
-import com.example.category_tree.command.ViewTreeCommand;
-import com.example.category_tree.service.CategoryService;
-import com.example.category_tree.service.CommandRegistry;
-import com.example.category_tree.service.ExcelService;
+import com.example.category_tree.command.*;
+import com.example.category_tree.service.*;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -104,6 +93,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void registerCommands() {
+        commandRegistry.register("start", new StartCommand(commandRegistry, this));
         commandRegistry.register("viewTree", new ViewTreeCommand(categoryService, this));
         commandRegistry.register("addElement", new AddElementCommand(categoryService, this));
         commandRegistry.register("removeElement", new RemoveElementCommand(categoryService, this));
